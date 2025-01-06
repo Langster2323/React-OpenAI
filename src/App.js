@@ -11,7 +11,6 @@ function App() {
     const prompt = {
       inputText: inputText
     }
-    console.log(prompt, "prompt")
 
     const result = await fetch("/api/ai", {
       method: "POST",
@@ -20,7 +19,6 @@ function App() {
       },
       body: JSON.stringify(prompt)
     })
-    console.log(result, "body")
 
     if (result.ok) {
       const airespond = await result.json(); // Parse the JSON response body
@@ -29,14 +27,14 @@ function App() {
       setImageUrl(airespond.imageURL);
       setSubmitStatus("Submit");
     } else {
-      console.log("Not working")
       setSubmitStatus("Retry");
     }
   };
 
   
 
-  async function submitDescription() {
+  async function submitDescription(e) {
+    e.preventDefault();
     setSubmitStatus("Waiting");
     responseGenerate(description);
   }
